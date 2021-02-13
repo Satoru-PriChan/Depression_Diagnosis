@@ -74,3 +74,20 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+  assets:
+    - assets/0001-depression-sleep-onset-insomnia.png
+    - assets/0002-depression-mid-nocturnal-insomnia.png
+    - assets/0003-depression-early-morning-insomnia.png
+    - assets/0004-depression-hypersomnia.png
+    - assets/0005-depression-sad-mood.png
+    - assets/0006-depression-too-less-appetite.png
+    - assets/0007-depression-too-much-appetite.png
+    - assets/0008-depression-weight-decrease.png
+    - assets/0009-depression-weight-increase.png
+    - assets/0010-depression-concentration.png
+    - assets/0011-depression-guilt.png
+    - assets/0012-depression-suicidal-ideation.png
+    - assets/0013-depression-involvement.png
+    - assets/0014-depression-fatigue.png
+    - assets/0015-depression-psycomotor-slowing.png
+    - assets/0016-depression-psycomotor-agitation.png
