@@ -1,4 +1,6 @@
-import 'package:depression_diagnosis/QuestionWidget.dart';
+import 'package:depression_diagnosis/View/QuestionResultModel.dart';
+import 'package:depression_diagnosis/View/QuestionResultWidget.dart';
+import 'package:depression_diagnosis/View/QuestionWidget.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -30,11 +32,25 @@ class MyApp extends StatelessWidget {
         backgroundColor: Colors.green[100],
         body: Stack(
           children: <Widget>[
-            QuestionWidget(
-              imageName: "assets/0001-depression-sleep-onset-insomnia.png",
-              question: "test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?test question?",
-              answers: ["Definitely Yes", "Yes", "No", "Defenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely NoDefenitely No"],
-            )
+            QuestionResultWidget(
+              model: QuestionResultModel(
+                "タイトルテキスト",
+                "リザルトテキストリザルトテキストリザルトテキストリザルトテキストリザルトテキストリザルトテキスト",
+                "フレーバーテキストフレーバーテキストフレーバーテキストフレーバーテキストフレーバーテキストフレーバーテキストフレーバーテキストフレーバーテキストフレーバーテキストフレーバーテキストフレーバーテキスト",
+                [
+                  QuestionResultAnswerModel(
+                  "答え１",
+                  "回答１"
+                  ),
+                ],
+                [
+                  QuestionResultPastResultModel(
+                      "2020/1/1",
+                      "ハハハ",
+                  )
+                ],
+              ),
+            ),
           ],
         ),
       ),

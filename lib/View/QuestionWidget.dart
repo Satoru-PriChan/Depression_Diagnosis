@@ -1,15 +1,10 @@
 import 'dart:core';
+import 'package:depression_diagnosis/View/QuestionWidgetModel.dart';
 import 'package:flutter/material.dart';
 
 class QuestionWidget extends StatefulWidget {
 
-  final String imageName;
-  final String question;
-  final List<String> answers;
-  final int maxSelectionCount;
-  
-  const QuestionWidget({Key key, this.imageName, this.question, this.answers, this.maxSelectionCount = 1,}) : super(key: key);
-
+  QuestionWidgetModel model;
 
   @override
   _QuestionWidgetState createState() => _QuestionWidgetState();
@@ -28,7 +23,7 @@ class _QuestionWidgetState extends State<QuestionWidget> {
       child: Column(
         children: [
           Image.asset(
-            widget.imageName,
+            widget.model.imageName,
             width: deviceWidth - 10,
             height: deviceWidth - 10
           ),
@@ -39,7 +34,7 @@ class _QuestionWidgetState extends State<QuestionWidget> {
           ListView.builder(
             shrinkWrap: true,
               scrollDirection: Axis.vertical,
-              itemCount: widget.answers.length,
+              itemCount: widget.model.answers.length,
               itemBuilder: (BuildContext ctxt, int index) {
                 return Container(
                   //選択されたアイテムを色付け
@@ -54,7 +49,7 @@ class _QuestionWidgetState extends State<QuestionWidget> {
 
   Text buildQuestionText() {
     return Text(
-            widget.question,
+            widget.model.question,
             maxLines: 3, 
             style: TextStyle(
                 fontWeight: FontWeight.bold,
@@ -65,37 +60,32 @@ class _QuestionWidgetState extends State<QuestionWidget> {
 
   ListTile buildListTile(int index) {
     return ListTile(
-                title: Text(
-                    widget.answers[index],
-                    maxLines: 1,
-                ),
-                onLongPress: (){
-
-                },
-                onTap: (){
-                  if(_selectedItems.contains(index)){
-                    //選択解除
-                    setState((){
-                      _selectedItems.removeWhere((val) => val == index);
-                    });
-                  } else {
-                    // 選択できるのは最大maxSelectionCount個まで
-                    if (widget.maxSelectionCount <= _selectedItems.length) {
-                      //選択解除 & 選択
-                      setState(() {
-                        _selectedItems.removeAt(0);
-                        _selectedItems.add(index);
-                      });
-                    } else {
-                      //選択
-                      setState(() {
-                        _selectedItems.add(index);
-                      });
-                    }
-                  }
-
-                  print("_selectedItems: ${_selectedItems}");
-                },
-              );
+      title: Text(
+        widget.model.answers[index],
+        maxLines: 1,
+      ),
+      onTap: (){
+        if(_selectedItems.contains(index)){
+          //選択解除
+          setState((){
+            _selectedItems.removeWhere((val) => val == index);
+          });
+        } else {
+          // 選択できるのは最大maxSelectionCount個まで
+          if (widget.model.maxSelectionCount <= _selectedItems.length) {
+            //選択解除 & 選択
+            setState(() {
+              _selectedItems.removeAt(0);
+              _selectedItems.add(index);
+            });
+          } else {
+            //選択
+            setState(() {
+              _selectedItems.add(index);
+            });
+          }
+        }
+        },
+    );
   }
 }
