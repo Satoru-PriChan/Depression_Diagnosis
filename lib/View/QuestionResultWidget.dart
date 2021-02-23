@@ -6,6 +6,8 @@ import 'QuestionResultModel.dart';
 class QuestionResultWidget extends StatelessWidget {
 
   final QuestionResultModel model;
+  static const double textHeight = 25.0;
+  static const double betweenTextsGap = 3.0;
 
   const QuestionResultWidget({
     Key key,
@@ -24,6 +26,7 @@ class QuestionResultWidget extends StatelessWidget {
     children: <Widget>[
       Padding(
         padding: EdgeInsets.all(10.0),
+
         child: Text(
           model.titleText,
           style: TextStyle(
@@ -53,21 +56,17 @@ class QuestionResultWidget extends StatelessWidget {
               return
                 Container(
                   color: Colors.green,
-                  padding: EdgeInsets.only(left: 10.0, right: 10.0),
+                  padding: EdgeInsets.only(top: 5.0, bottom: 5.0, left: 10.0, right: 10.0),
                   child: Row(
                     children: [
-                      Text(
-                        "${Index + 1}",
-                        style: TextStyle(backgroundColor: Colors.white),
+                      buildTextInSizedBox((Index + 1).toString(), width: 20.0),
+                      Expanded(
+                          child: Padding(
+                              padding: EdgeInsets.only(left: betweenTextsGap, right: betweenTextsGap),
+                              child: buildTextInSizedBox("${model.answers[Index].question}")
+                          ),
                       ),
-                      Text(
-                          "${model.answers[Index].question}",
-                        style: TextStyle(backgroundColor: Colors.white),
-                      ),
-                      Text(
-                          "${model.answers[Index].answer}",
-                        style: TextStyle(backgroundColor: Colors.white),
-                      ),
+                      buildTextInSizedBox("${model.answers[Index].answer}", width: 60.0),
                     ],
                   ),
                 );
@@ -82,17 +81,15 @@ class QuestionResultWidget extends StatelessWidget {
               itemBuilder: (BuildContext ctxt, int Index) {
                 return Container(
                   color: Colors.lightGreen,
-                  padding: EdgeInsets.only(left: 10.0, right: 10.0),
+                  padding: EdgeInsets.only(top: 5.0, bottom: 5.0, left: 10.0, right: 10.0),
                   child: Row(
                     children: [
-                      Text(
-                          "${model.history[Index].date}",
-                          style: TextStyle(backgroundColor: Colors.white),
-                      ),
-                      Text(
-                          "${model.history[Index].resultText}",
-                        style: TextStyle(backgroundColor: Colors.white),
-                      ),
+                      buildTextInSizedBox("${model.history[Index].date}", width: 70.0),
+                      Expanded(child: Padding(
+                          child: buildTextInSizedBox( "${model.history[Index].resultText}"),
+                          padding: EdgeInsets.only(left: betweenTextsGap)
+                        )
+                      )
                     ],
                   ),
                 );
@@ -101,5 +98,23 @@ class QuestionResultWidget extends StatelessWidget {
       ),
     ],
   );
+  }
+
+  SizedBox buildTextInSizedBox(String text, {double width = null}) {
+    return SizedBox(
+      height: textHeight,
+      width: width,
+      child: Container(
+        alignment: Alignment(0.0, 0.0),
+        color: Colors.white,
+        child: Text(
+          "${text}",
+          textAlign: TextAlign.center,
+          maxLines: 1,
+        ),
+      )
+    );
+
+
   }
 }
