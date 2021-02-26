@@ -439,3 +439,19 @@ SizedBox, ConstrainedBox
 
 https://itome.team/blog/2019/12/flutter-advent-calendar-day9/ FlutterのBoxConstraintsを理解する
 https://nzigen.com/flutter-reference/2018-05-01-constrained-box.html 要素の大きさを制限する
+
+## iOSの設定
+
+https://flutter.dev/docs/deployment/ios
+
+iosフォルダのRunner.xcworkspaceをXCodeで開いて設定を編集する。バージョンとDeployment Targetをいじった場合は、Flutter側の設定ファイルも更新
+
+# cp Users/development/flutter/bin/cache/artifacts/engine/ios/Flutter.podspec: No such file or directory
+
+https://github.com/flutter/flutter/issues/55095
+
+プロジェクトフォルダでflutter precacheを実行
+
+# Error: Error when reading 'lib/main.dart': No such file or directory package main.dart: Error: No 'main' method found. Try adding a method named 'main' to your program.
+
+main.dartファイルがlib直下になかったのでlib直下に移動
