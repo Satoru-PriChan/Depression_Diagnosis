@@ -410,6 +410,10 @@ print(“hello world”);
 ブレークポイント
 ブレークポイントの設置後、debugボタン（runボタンの隣）を押す。
 
+UI階層構造
+Open Flutter DevToolsボタンを開くとブラウザが開き、Widgetの階層構造がチェックできる
+https://flutter.dev/docs/development/tools/devtools/inspector
+
 ## UIの基本
 
 
@@ -435,6 +439,10 @@ Selectable List View In Flutter https://vermahitesh.medium.com/select-list-items
 
 ## 要素の大きさを決定・制限する
 
+
+Understanding constraints
+https://flutter.dev/docs/development/ui/layout/constraints
+
 SizedBox, ConstrainedBox
 
 https://itome.team/blog/2019/12/flutter-advent-calendar-day9/ FlutterのBoxConstraintsを理解する
@@ -444,7 +452,7 @@ https://nzigen.com/flutter-reference/2018-05-01-constrained-box.html 要素の�
 
 https://flutter.dev/docs/deployment/ios
 
-iosフォルダのRunner.xcworkspaceをXCodeで開いて設定を編集する。バージョンとDeployment Targetをいじった場合は、Flutter側の設定ファイルも更新
+iosフォルダにあるRunner.xcworkspaceをXCodeで開いて設定を編集する。バージョンとDeployment Targetをいじった場合は、Flutter側の設定ファイルも更新
 
 # cp Users/development/flutter/bin/cache/artifacts/engine/ios/Flutter.podspec: No such file or directory
 
@@ -455,3 +463,10 @@ https://github.com/flutter/flutter/issues/55095
 # Error: Error when reading 'lib/main.dart': No such file or directory package main.dart: Error: No 'main' method found. Try adding a method named 'main' to your program.
 
 main.dartファイルがlib直下になかったのでlib直下に移動
+
+# A RenderFlex overflowed by 134 pixels on the bottom.
+ウィジェットがデカすぎて画面をはみ出す、よくあるケース。単純にはみ出している全体をListViewで囲えばいい。
+
+https://stackoverflow.com/questions/49480051/flutter-dart-exceptions-caused-by-rendering-a-renderflex-overflowed
+全体をSingleChildScrollViewで囲うことも考えられる。
+https://api.flutter.dev/flutter/widgets/SingleChildScrollView-class.html

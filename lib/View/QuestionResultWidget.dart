@@ -17,92 +17,115 @@ class QuestionResultWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: buildColumn(),
+      child: buildWholeScreenList(),
     );
   }
 
-  Column buildColumn() {
-    return Column(
+  ListView buildWholeScreenList() {
+    return ListView(
     children: <Widget>[
-      Padding(
-        padding: EdgeInsets.all(10.0),
+      Center(
+        child: Padding(
+          padding: EdgeInsets.all(10.0),
+          child: Text(
+            model.titleText,
+            style: TextStyle(
+              fontSize: 24.0,
 
-        child: Text(
-          model.titleText,
-          style: TextStyle(
-            fontSize: 24.0,
+            ),
+            maxLines: 1,
           ),
-        ),
+        )
       ),
       Padding(
         padding: EdgeInsets.all(10.0),
         child: Text(
           model.resultText,
           style: TextStyle(
-            fontSize: 32.0,
+            fontSize: 28.0,
           ),
+          maxLines: 3,
         ),
       ),
       Padding(
         padding: EdgeInsets.all(10.0),
-        child: Text(model.flavorText),
-      ),
-      Padding(
-        padding: EdgeInsets.all(10.0),
-        child: ListView.builder(
-            shrinkWrap: true,
-            itemCount: model.answers.length,
-            itemBuilder: (BuildContext ctxt, int Index) {
-              return
-                Container(
-                  color: Colors.green,
-                  padding: EdgeInsets.only(top: 5.0, bottom: 5.0, left: 10.0, right: 10.0),
-                  child: Row(
-                    children: [
-                      buildTextInSizedBox((Index + 1).toString(), width: 20.0),
-                      Expanded(
-                          child: Padding(
-                              padding: EdgeInsets.only(left: betweenTextsGap, right: betweenTextsGap),
-                              child: buildTextInSizedBox("${model.answers[Index].question}")
-                          ),
-                      ),
-                      buildTextInSizedBox("${model.answers[Index].answer}", width: 60.0),
-                    ],
-                  ),
-                );
-            }
+        child: Text(
+            model.flavorText,
+            maxLines: 4,
         ),
       ),
       Padding(
-          padding: EdgeInsets.all(10.0),
-          child: ListView.builder(
-              shrinkWrap: true,
-              itemCount: model.history.length,
-              itemBuilder: (BuildContext ctxt, int Index) {
-                return Container(
-                  color: Colors.lightGreen,
-                  padding: EdgeInsets.only(top: 5.0, bottom: 5.0, left: 10.0, right: 10.0),
-                  child: Row(
-                    children: [
-                      buildTextInSizedBox("${model.history[Index].date}", width: 70.0),
-                      Expanded(child: Padding(
-                          child: buildTextInSizedBox( "${model.history[Index].resultText}"),
-                          padding: EdgeInsets.only(left: betweenTextsGap)
-                        )
-                      )
-                    ],
-                  ),
-                );
-              }
-          ),
+        padding: EdgeInsets.all(10.0),
+        child: buildAnswersListView(),
+      ),
+      Padding(
+        padding: EdgeInsets.all(10.0),
+        child: buildHistoryListView(),
       ),
     ],
   );
   }
 
-  SizedBox buildTextInSizedBox(String text, {double width = null}) {
+  ListView buildAnswersListView() {
+    return ListView.builder(
+          shrinkWrap: true,
+          itemCount: model.answers.length,
+          itemBuilder: (BuildContext ctxt, int Index) {
+            return
+              Container(
+                color: Colors.green,
+                padding: EdgeInsets.only(top: 5.0, bottom: 5.0, left: 10.0, right: 10.0),
+                child: Row(
+                  children: [
+                    buildTextInSizedBox((Index + 1).toString(), width: 20.0),
+                    Expanded(
+                        child: Padding(
+                            padding: EdgeInsets.only(left: betweenTextsGap, right: betweenTextsGap),
+                            child: buildTextInSizedBox(
+                                "${model.answers[Index].question}",
+                                maxLinesCount: 2
+                            )
+                        ),
+                    ),
+                    buildTextInSizedBox(
+                        "${model.answers[Index].answer}",
+                        width: 60.0,
+                        maxLinesCount: 2),
+                  ],
+                ),
+              );
+          }
+      );
+  }
+
+  ListView buildHistoryListView() {
+    return ListView.builder(
+            shrinkWrap: true,
+            itemCount: model.history.length,
+            itemBuilder: (BuildContext ctxt, int Index) {
+              return Container(
+                color: Colors.lightGreen,
+                padding: EdgeInsets.only(top: 5.0, bottom: 5.0, left: 10.0, right: 10.0),
+                child: Row(
+                  children: [
+                    buildTextInSizedBox("${model.history[Index].date}", width: 70.0),
+                    Expanded(child: Padding(
+                        child: buildTextInSizedBox(
+                            "${model.history[Index].resultText}",
+                            maxLinesCount: 2
+                        ),
+                        padding: EdgeInsets.only(left: betweenTextsGap)
+                      )
+                    )
+                  ],
+                ),
+              );
+            }
+        );
+  }
+
+  SizedBox buildTextInSizedBox(String text, { double width = null, int maxLinesCount = 1 }) {
     return SizedBox(
-      height: textHeight,
       width: width,
       child: Container(
         alignment: Alignment(0.0, 0.0),
@@ -110,11 +133,9 @@ class QuestionResultWidget extends StatelessWidget {
         child: Text(
           "${text}",
           textAlign: TextAlign.center,
-          maxLines: 1,
+          maxLines: maxLinesCount,
         ),
       )
     );
-
-
   }
 }
