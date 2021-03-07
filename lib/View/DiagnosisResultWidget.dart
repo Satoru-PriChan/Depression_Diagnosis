@@ -1,15 +1,15 @@
 import 'package:depression_diagnosis/View/QuestionWidget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'QuestionResultModel.dart';
+import 'DiagnosisResultModel.dart';
 
-class QuestionResultWidget extends StatelessWidget {
+class DiagnosisResultWidget extends StatelessWidget {
 
-  final QuestionResultModel model;
+  final DiagnosisResultModel model;
   static const double textHeight = 25.0;
   static const double betweenTextsGap = 3.0;
 
-  const QuestionResultWidget({
+  const DiagnosisResultWidget({
     Key key,
     this.model,
   }) : super(key: key);

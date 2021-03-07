@@ -470,3 +470,29 @@ main.dartファイルがlib直下になかったのでlib直下に移動
 https://stackoverflow.com/questions/49480051/flutter-dart-exceptions-caused-by-rendering-a-renderflex-overflowed
 全体をSingleChildScrollViewで囲うことも考えられる。
 https://api.flutter.dev/flutter/widgets/SingleChildScrollView-class.html
+
+## test
+Unit Test, Widget Test, Integration Testがある。
+https://flutter.dev/docs/testing
+https://flutter.dev/docs/testing/integration-tests
+
+## Automatically assigning platform `iOS` with version `12.1` on target `Runner` because no platform was specified. Please specify a platform for this target in your Podfile.
+
+platform :ios, '12.0'などをios/podfileで指定する
+
+## Cocoapods: LoadError - dlsym(0x7fc10fbfc9c0, Init_ffi_c): symbol not found
+
+Big Surで起きる。arch -x86_64 sudo gem install ffiを叩く。
+https://github.com/flutter/flutter/wiki/Developing-with-Flutter-on-Apple-Silicon
+
+## Unhandled Exception: type 'Future<dynamic>' is not a subtype of type 
+awaitをつけてなかった
+
+## [VERBOSE-2:profiler_metrics_ios.mm(184)] Error retrieving thread information: (ipc/send) invalid destination port
+
+ios　シミュレータを再起動
+https://github.com/flutter/flutter/issues/63025
+
+## flutter: ignore recovered database ROLLBACK error DatabaseException(Error Domain=FMDatabase Code=1 "cannot rollback - no transaction is active" UserInfo={NSLocalizedDescription=cannot rollback - no transaction is active}) sql 'ROLLBACK' args []}
+
+openDatabase　関数が終わる前（databaseの生成が終わる前）に、改めてそのdatabaseにアクセスして初期データをinsertしようとしてしまっていた。その代わり、openDatabaseのonCreateクロージャの引数として渡されるdatabaseを用いて、insertをすると上手くいった。

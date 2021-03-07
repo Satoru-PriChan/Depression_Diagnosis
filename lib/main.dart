@@ -1,9 +1,26 @@
-import 'package:depression_diagnosis/View/QuestionResultModel.dart';
-import 'package:depression_diagnosis/View/QuestionResultWidget.dart';
+import 'package:depression_diagnosis/Data/Entity/DiagnosisEntity.dart';
+import 'package:depression_diagnosis/Data/Entity/DiagnosisResultEntity.dart';
+import 'package:depression_diagnosis/Data/Entity/DiagnosisResultHistoryEntity.dart';
+import 'package:depression_diagnosis/Data/Entity/QuestionEntity.dart';
+import 'package:depression_diagnosis/View/DiagnosisResultModel.dart';
+import 'package:depression_diagnosis/View/DiagnosisResultWidget.dart';
 import 'package:depression_diagnosis/View/QuestionWidget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
-void main() {
+import 'Data/Util/DBClient.dart';
+
+void main() async {
+  // Avoid errors caused by flutter upgrade.
+  // Importing 'package:flutter/widgets.dart' is required.
+  WidgetsFlutterBinding.ensureInitialized();
+
+  List<DiagnosisEntity> entities = await DBClient.query(DBObjectsStrategy.diagnosis);
+  print("fetched entities ${entities}");
+  List<QuestionEntity> questionEntities = await DBClient.query(DBObjectsStrategy.question);
+  print("fetched question entities ${questionEntities}");
+  List<DiagnosisResultEntity> diagnosisResultEntites = await DBClient.query(DBObjectsStrategy.diagnosisResult);
+  print("fetched diagnosis result entities ${diagnosisResultEntites}");
   runApp(MyApp());
 }
 
@@ -32,68 +49,68 @@ class MyApp extends StatelessWidget {
         backgroundColor: Colors.green[100],
         body: Stack(
           children: <Widget>[
-            QuestionResultWidget(
-              model: QuestionResultModel(
+            DiagnosisResultWidget(
+              model: DiagnosisResultModel(
                 "タイトルテキスト",
                 "リザルトテキストリザルトテキストリザルトテキストリザルトテキストリザルトテキストリザルトテキスト",
                 "フレーバーテキストフレーバーテキストフレーバーテキストフレーバーテキストフレーバーテキストフレーバーテキストフレーバーテキストフレーバーテキストフレーバーテキストフレーバーテキストフレーバーテキスト",
                 [
-                  QuestionResultAnswerModel(
+                  DiagnosisResultAnswerModel(
                   "答え１",
                   "回答１"
                   ),
-                  QuestionResultAnswerModel(
+                  DiagnosisResultAnswerModel(
                       "答え１",
                       "回答１"
                   ),
-                  QuestionResultAnswerModel(
+                  DiagnosisResultAnswerModel(
                       "答え１",
                       "回答１"
                   ),
-                  QuestionResultAnswerModel(
+                  DiagnosisResultAnswerModel(
                       "答え１",
                       "回答１"
                   ),
-                  QuestionResultAnswerModel(
+                  DiagnosisResultAnswerModel(
                       "答え１",
                       "回答１"
                   ),
-                  QuestionResultAnswerModel(
+                  DiagnosisResultAnswerModel(
                       "答え１",
                       "回答１"
                   ),
-                  QuestionResultAnswerModel(
+                  DiagnosisResultAnswerModel(
                       "答え１",
                       "回答１"
                   ),
-                  QuestionResultAnswerModel(
+                  DiagnosisResultAnswerModel(
                       "答え１",
                       "回答１"
                   ),
-                  QuestionResultAnswerModel(
+                  DiagnosisResultAnswerModel(
                       "答え１",
                       "回答１"
                   ),
-                  QuestionResultAnswerModel(
+                  DiagnosisResultAnswerModel(
                       "答え１",
                       "回答１"
                   ),
-                  QuestionResultAnswerModel(
+                  DiagnosisResultAnswerModel(
                       "答え１",
                       "回答１"
-                  ),QuestionResultAnswerModel(
+                  ),DiagnosisResultAnswerModel(
                     "答え１",
                     "回答１"
-                ),QuestionResultAnswerModel(
+                ),DiagnosisResultAnswerModel(
                     "答え１答え１答え１答え１答え１答え１答え１答え１答え１答え１答え１答え１答え１答え１答え１答え１答え１答え１答え１答え１答え１答え１答え１答え１答え１答え１答え１答え１答え１答え１答え１",
                     "回答１回答１回答１回答１回答１回答１回答１回答１回答１回答１回答１回答１回答１回答１回答１回答１回答１回答１回答１回答１回答１回答１回答１回答１回答１回答１回答１回答１回答１回答１回答１回答１回答１回答１回答１"
-                ),QuestionResultAnswerModel(
+                ),DiagnosisResultAnswerModel(
                     "答え１",
                     "回答１"
-                ),QuestionResultAnswerModel(
+                ),DiagnosisResultAnswerModel(
                     "答え１",
                     "回答１"
-                ),QuestionResultAnswerModel(
+                ),DiagnosisResultAnswerModel(
                     "答え１",
                     "回答１"
                 ),
@@ -105,7 +122,7 @@ class MyApp extends StatelessWidget {
 
                 ],
                 [
-                  QuestionResultPastResultModel(
+                  DiagnosisResultPastResultModel(
                       "2020/1/1",
                       "ハハハ",
                   )
