@@ -496,3 +496,13 @@ https://github.com/flutter/flutter/issues/63025
 ## flutter: ignore recovered database ROLLBACK error DatabaseException(Error Domain=FMDatabase Code=1 "cannot rollback - no transaction is active" UserInfo={NSLocalizedDescription=cannot rollback - no transaction is active}) sql 'ROLLBACK' args []}
 
 openDatabase　関数が終わる前（databaseの生成が終わる前）に、改めてそのdatabaseにアクセスして初期データをinsertしようとしてしまっていた。その代わり、openDatabaseのonCreateクロージャの引数として渡されるdatabaseを用いて、insertをすると上手くいった。
+
+## The default value of an optional parameter must be constant.
+デフォルト値を定数にしろ
+関数内でデフォルト値を与えるのもあり
+```
+void f([int value]) {
+  value ??= defaultValue;
+}
+```
+https://dart.dev/tools/diagnostic-messages#non_constant_default_value

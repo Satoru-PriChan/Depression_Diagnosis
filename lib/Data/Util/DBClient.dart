@@ -118,9 +118,9 @@ class DBClient {
 
     print("creating diagnosis table: ${createDiagnosisStr}");
     await db.execute(createDiagnosisStr);
-    db.execute(createQuestionStr);
-    db.execute(createDiagnosisResultStr);
-    db.execute(createDiagnosisResultHistoryStr);
+    await db.execute(createQuestionStr);
+    await db.execute(createDiagnosisResultStr);
+    await db.execute(createDiagnosisResultHistoryStr);
 
     //初期データ注入
     return await _populateDB(db);
@@ -277,9 +277,15 @@ class DBClient {
     return res;
   }
 
-  static query(DBObjectsStrategy strategy) async {
+  ///      where: 'columnId = ?',
+  //      whereArgs: [id]
+  static query(DBObjectsStrategy strategy, {String where = null, List<dynamic> whereArgs = null}) async {
     final db = await database;
-    var res = await db.query(strategy.tableName);
+    var res = await db.query(
+        strategy.tableName,
+      where: where,
+      whereArgs: whereArgs,
+    );
     List<dynamic> list = strategy.getObject(res);
     return list;
   }

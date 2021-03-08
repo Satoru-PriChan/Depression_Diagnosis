@@ -17,7 +17,7 @@ void main() async {
 
   List<DiagnosisEntity> entities = await DBClient.query(DBObjectsStrategy.diagnosis);
   print("fetched entities ${entities}");
-  List<QuestionEntity> questionEntities = await DBClient.query(DBObjectsStrategy.question);
+  List<QuestionEntity> questionEntities = await DBClient.query(DBObjectsStrategy.question, where: 'id = ?', whereArgs: [1]);
   print("fetched question entities ${questionEntities}");
   List<DiagnosisResultEntity> diagnosisResultEntites = await DBClient.query(DBObjectsStrategy.diagnosisResult);
   print("fetched diagnosis result entities ${diagnosisResultEntites}");
