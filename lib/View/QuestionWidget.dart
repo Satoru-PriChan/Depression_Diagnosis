@@ -6,6 +6,8 @@ class QuestionWidget extends StatefulWidget {
 
   QuestionWidgetModel model;
 
+  QuestionWidget(this.model);
+
   @override
   _QuestionWidgetState createState() => _QuestionWidgetState();
 }
@@ -39,7 +41,7 @@ class _QuestionWidgetState extends State<QuestionWidget> {
                 return Container(
                   //選択されたアイテムを色付け
                   color: (_selectedItems.contains(index) ? Colors.blue.withOpacity(0.5) : Colors.transparent),
-                  child: buildListTile(index),
+                  child: buildListTile(index, context),
                 );
               }),
         ],
@@ -58,7 +60,7 @@ class _QuestionWidgetState extends State<QuestionWidget> {
         );
   }
 
-  ListTile buildListTile(int index) {
+  ListTile buildListTile(int index, BuildContext context) {
     return ListTile(
       title: Text(
         widget.model.answers[index],
@@ -71,21 +73,24 @@ class _QuestionWidgetState extends State<QuestionWidget> {
             _selectedItems.removeWhere((val) => val == index);
           });
         } else {
-          // 選択できるのは最大maxSelectionCount個まで
-          if (widget.model.maxSelectionCount <= _selectedItems.length) {
-            //選択解除 & 選択
-            setState(() {
-              _selectedItems.removeAt(0);
-              _selectedItems.add(index);
-            });
-          } else {
-            //選択
+          //選択
+          if (widget.model.maxSelectionCount > _selectedItems.length) {
             setState(() {
               _selectedItems.add(index);
             });
           }
+
+          //最大まで選択し終わった場合
+          if (widget.model.maxSelectionCount <= _selectedItems.length) {
+            //通知
+            widget.model.selectionFinished(
+                _selectedItems,
+                _selectedItems.map((index) => widget.model.answers[index]).toList(),
+                context,
+            );
+          }
         }
-        },
+      },
     );
   }
 }

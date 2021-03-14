@@ -34,7 +34,7 @@ class QuestionEntity implements DBEntityProtocol {
       this.answer10,
       this.diagnosisID,
       this.maxSelectionCount,
-      this._id
+      [this._id = null]
       );
 
   factory QuestionEntity.fromMap(Map<String, dynamic> json) => QuestionEntity(
@@ -57,8 +57,9 @@ class QuestionEntity implements DBEntityProtocol {
 
   @override
   Map<String, dynamic> toMap() {
+
+    //idは指定しなければSQLiteが勝手に補完してくれるので指定しない
     return {
-      'id': id,
       'imageName': imageName,
       'question': question,
       'answer01': answer01,

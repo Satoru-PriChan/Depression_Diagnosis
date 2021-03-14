@@ -31,4 +31,14 @@ class DiagnosisResultPastResultModel {
   String resultText;
 
   DiagnosisResultPastResultModel(this.date, this.resultText);
+
+  // Implement toString to make it easier to see information about
+  // each dog when using the print statement.
+  @override
+  String toString() {
+    return 'DiagnosisResultPastResultModel{'
+        'date: $date, '
+        'resultText: $resultText'
+        '}';
+  }
 }

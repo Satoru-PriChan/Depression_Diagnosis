@@ -6,7 +6,7 @@ class DiagnosisEntity implements DBEntityProtocol {
   final DBObjectsStrategy strategy = DBObjectsStrategy.diagnosis;
   final String name;
 
-  DiagnosisEntity(this.name, this._id);
+  DiagnosisEntity(this.name, [this._id = null]);
 
   factory DiagnosisEntity.fromMap(Map<String, dynamic> json) => DiagnosisEntity(
       json['name'],
@@ -16,7 +16,7 @@ class DiagnosisEntity implements DBEntityProtocol {
   @override
   Map<String, dynamic> toMap() {
     return {
-      'id': id,
+      //idは指定しなければSQLiteが勝手に補完してくれるので指定しない
       'name': name,
     };
   }

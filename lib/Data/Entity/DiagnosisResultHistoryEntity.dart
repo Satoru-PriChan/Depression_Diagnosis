@@ -7,19 +7,19 @@ class DiagnosisResultHistoryEntity implements DBEntityProtocol {
   final int diagnosisResultID;
   final String date;
 
-  DiagnosisResultHistoryEntity(this.diagnosisResultID, this._id, this.date);
+  DiagnosisResultHistoryEntity(this.diagnosisResultID, this.date, [this._id = null]);
 
   factory DiagnosisResultHistoryEntity.fromMap(Map<String, dynamic> json) => DiagnosisResultHistoryEntity(
-      json['id'],
       json['diagnosisResultID'],
       json['date'],
+      json['id'],
   );
 
   @override
   Map<String, dynamic> toMap() {
     return {
-      'id': id,
-      'diagnosisID': diagnosisResultID,
+      //idは指定しなければSQLiteが勝手に補完してくれるので指定しない
+      'diagnosisResultID': diagnosisResultID,
       'date': date,
     };
   }

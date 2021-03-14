@@ -8,19 +8,19 @@ class DiagnosisResultEntity implements DBEntityProtocol {
   final String name;
   final String flavorText;
 
-  DiagnosisResultEntity(this.name, this.diagnosisID, this._id, this.flavorText);
+  DiagnosisResultEntity(this.name, this.diagnosisID, this.flavorText, [this._id = null]);
 
   factory DiagnosisResultEntity.fromMap(Map<String, dynamic> json) => DiagnosisResultEntity(
       json['name'],
       json['diagnosisID'],
-      json['id'],
       json['flavorText'],
+      json['id'],
   );
 
   @override
   Map<String, dynamic> toMap() {
     return {
-      'id': id,
+      //idは指定しなければSQLiteが勝手に補完してくれるので指定しない
       'diagnosisID': diagnosisID,
       'name': name,
       'flavorText': flavorText,

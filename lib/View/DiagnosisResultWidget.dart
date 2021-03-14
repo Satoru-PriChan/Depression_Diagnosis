@@ -9,10 +9,7 @@ class DiagnosisResultWidget extends StatelessWidget {
   static const double textHeight = 25.0;
   static const double betweenTextsGap = 3.0;
 
-  const DiagnosisResultWidget({
-    Key key,
-    this.model,
-  }) : super(key: key);
+  DiagnosisResultWidget(this.model,);
 
   @override
   Widget build(BuildContext context) {

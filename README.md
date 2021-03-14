@@ -357,8 +357,8 @@ https://logmi.jp/tech/articles/303939
 
 ## 画面遷移
 
-
 [Flutter]画面遷移のやり方　　https://qiita.com/kono-hiroki/items/b1a8f19dfab371e7816d
+公式 https://flutter.dev/docs/cookbook/navigation/navigation-basics
 
 ## 画像素材
 
@@ -475,6 +475,7 @@ https://api.flutter.dev/flutter/widgets/SingleChildScrollView-class.html
 Unit Test, Widget Test, Integration Testがある。
 https://flutter.dev/docs/testing
 https://flutter.dev/docs/testing/integration-tests
+https://flutter.dev/docs/cookbook/testing/integration/introduction
 
 ## Automatically assigning platform `iOS` with version `12.1` on target `Runner` because no platform was specified. Please specify a platform for this target in your Podfile.
 
@@ -506,3 +507,65 @@ void f([int value]) {
 }
 ```
 https://dart.dev/tools/diagnostic-messages#non_constant_default_value
+
+## flutter アプリの公式の例
+https://flutter.github.io/samples/#
+
+## widgetのライフサイクル
+
+initState()はviewDidLoadやonCreateに相当する。
+
+https://medium.com/flutter-community/flutter-lifecycle-for-android-and-ios-developers-8f532307e0c7
+https://qiita.com/sekitaka_1214/items/b087f9e9fc13424a64bb
+
+## map 関数
+
+https://stackoverflow.com/questions/49941361/dart-mapping-a-list-list-map
+
+## 明らかにコーディングはおかしくないのに意味不明なエラーがいっぱい出る
+
+Android Studioの再起動、PC再起動
+https://android-java.hatenablog.jp/entry/2016/10/01/080806
+
+## 集計したい時
+reduce関数
+
+## 日付関係
+
+DateTime
+    toString()
+        toString()で取得したstringはparseで元に戻すことができる。
+    parse()
+https://api.dart.dev/stable/2.12.1/dart-core/DateTime-class.html
+
+DateFormatter
+使い方
+https://stackoverflow.com/questions/58337796/how-to-remove-time-from-date-flutter
+
+## Undefined class 'DateFormat'
+
+intlパッケージをpub getし、目的のファイルでimportする。
+https://pub.dev/packages/intl/install
+
+## DB insert idについて
+
+DARTには関係ないが、SQLiteでカラムに対して INTEGER PRIMARY KEY を設定した場合、データを追加した時に INTEGER PRIMARY KEY を設定したカラムの値を指定しないと自動的に値が格納される。ので、そのカラムに特に値は指定せずinsertすればいい。
+https://www.dbonline.jp/sqlite/table/index9.html
+
+## 日付でソート
+
+```
+products.sort((a,b) {
+    return a.compareTo(b);
+ });
+```
+https://stackoverflow.com/questions/57000166/how-to-sort-order-a-list-by-date-in-dart-flutter
+
+## ForEachで複数の非同期処理を行い、全て終わってから下の処理に進みたい
+
+```
+  Future.forEach(list, (num) async {
+    // do something
+  });
+```
+https://qiita.com/hisw/items/2df0052a400263d5863e

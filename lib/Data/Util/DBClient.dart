@@ -52,7 +52,7 @@ extension DBObjectsStrategyExtension on DBObjectsStrategy {
         return list;
       case DBObjectsStrategy.diagnosisResultHistory:
         List<DiagnosisResultHistoryEntity> list =
-        res.isNotEmpty ? res.map((c) => DiagnosisResultEntity.fromMap(c)).toList() : [];
+        res.isNotEmpty ? res.map((c) => DiagnosisResultHistoryEntity.fromMap(c)).toList() : [];
         return list;
     }
   }
@@ -60,6 +60,12 @@ extension DBObjectsStrategyExtension on DBObjectsStrategy {
 
 class DBClient {
   static Database _database;
+
+  static Future<String> databasePath() async {
+    Directory documentsDirectory = await getApplicationDocumentsDirectory();
+    String path = join(documentsDirectory.path, "TestDB.db");
+    return path;
+  }
 
   static Future<Database> get database async {
     if (_database != null)
@@ -71,8 +77,7 @@ class DBClient {
   }
 
   static Future<Database> initDB() async {
-    Directory documentsDirectory = await getApplicationDocumentsDirectory();
-    String path = join(documentsDirectory.path, "TestDB.db");
+    String path = await databasePath();
     // DB作成時にテーブル作成も行う
     return await openDatabase(path, version: 1, onCreate: _createTable);
   }
@@ -132,11 +137,11 @@ class DBClient {
       DiagnosisEntity("うつ病診断", 1),
     ];
     final List<DiagnosisResultEntity> diagnosisResultData = [
-      DiagnosisResultEntity("正常", 1, 1, "全く問題ありません！ただし無理をし過ぎれば誰でも鬱になる可能性がありますので、日頃から心身をケアする時間は持つようにしておきましょう。"),
-      DiagnosisResultEntity("軽度", 1, 2, "軽い鬱症状が見られます。生活を少し見直し、ストレス源となっている物を取り除いたり、バランスの取れた食事や軽い運動、日光浴などを心がけましょう。"),
-      DiagnosisResultEntity("中等度", 1, 3, "うつ病である可能性が高いです。生活を整えるのに加えて、信頼できる心療内科等に相談しましょう。"),
-      DiagnosisResultEntity("重度", 1, 4, "うつの症状が重くなっています。今日にでも心療内科や精神科を予約しましょう。お薬などでうつを和らげつつ、生活再建の時間を作っていけましょう。"),
-      DiagnosisResultEntity("きわめて重度", 1, 5, "非常に深刻な状態です！ 今すぐ落ち着ける環境に身を置き、精神科の予約をとってください。症状が少し和らぐまでは、生き残ることだけを考えてください。"),
+      DiagnosisResultEntity("正常", 1, "全く問題ありません！ただし無理をし過ぎれば誰でも鬱になる可能性がありますので、日頃から心身をケアする時間は持つようにしておきましょう。", 1,),
+      DiagnosisResultEntity("軽度", 1, "軽い鬱症状が見られます。生活を少し見直し、ストレス源となっている物を取り除いたり、バランスの取れた食事や軽い運動、日光浴などを心がけましょう。", 2,),
+      DiagnosisResultEntity("中等度", 1, "うつ病である可能性が高いです。生活を整えるのに加えて、信頼できる心療内科等に相談しましょう。", 3,),
+      DiagnosisResultEntity("重度", 1, "うつの症状が重くなっています。今日にでも心療内科や精神科を予約しましょう。お薬などでうつを和らげつつ、生活再建の時間を作っていけましょう。", 4,),
+      DiagnosisResultEntity("きわめて重度", 1, "非常に深刻な状態です！ 今すぐ落ち着ける環境に身を置き、精神科の予約をとってください。症状が少し和らぐまでは、生き残ることだけを考えてください。", 5,),
     ];
     final List<QuestionEntity> questionData = [
       QuestionEntity(
@@ -181,13 +186,6 @@ class DBClient {
           "普段より少し回数や量が少ない",
           "普段よりかなり回数や量が少ない",
           "まる一日ほとんど食べず、食べるのは極めて強く食べようと努力したり他人から勧められた場合のみだ", "", "", "", "", "", "", 1, 1, 6),
-      QuestionEntity(
-          "assets/0007-depression-too-much-appetite.png",
-          "最近、食欲が増えていますか？",
-          "普段と変わらない",
-          "普段より頻繁または量が多いと感じることがある",
-          "常に、普段より頻繁または量が多いと感じる",
-          "食事の時も、食事の間も、食べ過ぎる衝動が強い", "", "", "", "", "", "", 1, 1, 7),
       QuestionEntity(
           "assets/0007-depression-too-much-appetite.png",
           "最近、食欲が増えていますか？",
@@ -278,7 +276,7 @@ class DBClient {
   }
 
   ///      where: 'columnId = ?',
-  //      whereArgs: [id]
+  ///      whereArgs: [id]
   static query(DBObjectsStrategy strategy, {String where = null, List<dynamic> whereArgs = null}) async {
     final db = await database;
     var res = await db.query(
@@ -308,5 +306,14 @@ class DBClient {
         where: "id = ?",
         whereArgs: [id]
     );
+  }
+
+  /// データベース初期化（全削除）
+  static Future<void> resetDatabase() async {
+    String path = await databasePath();
+    if (path != null) {
+     await deleteDatabase(path);
+    }
+
   }
 }
