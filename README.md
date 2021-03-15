@@ -569,3 +569,27 @@ https://stackoverflow.com/questions/57000166/how-to-sort-order-a-list-by-date-in
   });
 ```
 https://qiita.com/hisw/items/2df0052a400263d5863e
+
+## .initState() returned a Future. State.initState() must be a void method without an `async` keyword. Rather than awaiting on asynchronous work directly inside of initState, call a separate method to do this work without awaiting it.
+
+ウィジェット表示前に非同期処理をしたい場合、initState()メソッドをasyncにするのではなくFutureBuilderを使う。
+
+```
+Instead, you need to have your widget build normally and then have a way to notify your widget to update when the Future has returned. This is most easily done with a FutureBuilder:
+
+@override
+Widget build(BuildContext context) {
+  return FutureBuilder(
+    future: doSomeAsyncStuff(),
+    builder: (context, snapshot) {
+      if (!snapshot.hasData) {
+        // Future hasn't finished yet, return a placeholder
+        return Text('Loading');
+      }
+      return Text('Loading Complete: ${snapshot.data}');
+    }
+  );
+}
+```
+
+https://stackoverflow.com/questions/61764400/state-initstate-must-be-a-void-method-without-an-async-keyword

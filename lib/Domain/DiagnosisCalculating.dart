@@ -3,7 +3,7 @@ import 'package:depression_diagnosis/Data/Util/DBClient.dart';
 
 /// 診断の答えを計算する
 abstract class DiagnosisCalculating {
-  CalculatedDiagnosisResult calculate(List<List<int>> answerIndicesList, List<List<String>> answerStringsList){}
+  Future<CalculatedDiagnosisResult> calculate(List<List<int>> answerIndicesList, List<List<String>> answerStringsList){}
 }
 
 /// 診断の答え
@@ -18,14 +18,14 @@ class CalculatedDiagnosisResult {
 /// うつ病診断の答えを計算する
 class DepressionDiagnosisCalculator implements DiagnosisCalculating {
   @override
-  CalculatedDiagnosisResult calculate(List<List<int>> answerIndicesList, List<List<String>> answerStringsList) {
+  Future<CalculatedDiagnosisResult> calculate(List<List<int>> answerIndicesList, List<List<String>> answerStringsList) async {
 
     int score = 0;
     answerIndicesList.forEach((answerIndices) {
        score += (answerIndices[0]);
     });
 
-    List<DiagnosisResultEntity> results = DBClient.query(DBObjectsStrategy.diagnosisResult);
+    List<DiagnosisResultEntity> results = await DBClient.query(DBObjectsStrategy.diagnosisResult);
     DiagnosisResultEntity result;
 
     if (score <= 5) {

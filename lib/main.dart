@@ -2,6 +2,10 @@ import 'package:depression_diagnosis/Data/Entity/DiagnosisEntity.dart';
 import 'package:depression_diagnosis/Data/Entity/DiagnosisResultEntity.dart';
 import 'package:depression_diagnosis/Data/Entity/DiagnosisResultHistoryEntity.dart';
 import 'package:depression_diagnosis/Data/Entity/QuestionEntity.dart';
+import 'package:depression_diagnosis/Domain/AnswerTranslating.dart';
+import 'package:depression_diagnosis/Domain/DiagnosisCalculating.dart';
+import 'package:depression_diagnosis/Domain/QuestionTranslating.dart';
+import 'package:depression_diagnosis/View/Diagnosis/DiagnosisWidget.dart';
 import 'package:depression_diagnosis/View/DiagnosisResultModel.dart';
 import 'package:depression_diagnosis/View/DiagnosisResultWidget.dart';
 import 'package:depression_diagnosis/View/QuestionWidget.dart';
@@ -14,9 +18,11 @@ import 'Domain/DiagnosisResultHistoryRepository.dart';
 void main() async {
   // Avoid errors caused by flutter upgrade.
   // Importing 'package:flutter/widgets.dart' is required.
-  WidgetsFlutterBinding.ensureInitialized();
+  //WidgetsFlutterBinding.ensureInitialized();
+  runApp(MyApp());
+}
 
-
+Future testDiagnosisResultHistoryRepository() async {
   DiagnosisResultHistoryRepository repo = DiagnosisResultHistoryRepository();
   var result = await repo.fetch(1);
   print("result: $result");
@@ -32,9 +38,6 @@ void main() async {
   await repo.add(3);
   var result5 = await repo.fetch(1);
   print("result5: $result5");
-
-
-  runApp(MyApp());
 }
 
 Future testDB() async {
@@ -86,7 +89,17 @@ class MyApp extends StatelessWidget {
 
 
   List<Widget> buildMaterialApp() {
-    return [Text("Hi")];
+    return <Widget>[
+      DiagnosisWidget(
+        DiagnosisWidgetDependency(
+          1,
+          DepressionDiagnosisCalculator(),
+          AnswerTranslator(),
+          QuestionTranslator(),
+          DiagnosisResultHistoryRepository(),
+      )
+     )
+    ];
   }
 /*
   List<Widget> buildTestDiagnosisResultWidget() {

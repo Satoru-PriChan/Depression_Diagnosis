@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:depression_diagnosis/Data/Entity/DiagnosisEntity.dart';
 import 'package:depression_diagnosis/Data/Entity/QuestionEntity.dart';
 import 'package:depression_diagnosis/Data/Util/DBClient.dart';
@@ -33,15 +35,13 @@ class DiagnosisWidget extends StatefulWidget {
 
   final DiagnosisWidgetDependency dependency;
 
-  const DiagnosisWidget({Key key, this.dependency}) : super(key: key);
+  DiagnosisWidget(this.dependency);
 
   @override
-  State<StatefulWidget> createState() {
-    throw DiagnosisState();
-  }
+  State<StatefulWidget> createState() => _DiagnosisState();
 }
 
-class DiagnosisState extends State<DiagnosisWidget> {
+class _DiagnosisState extends State<DiagnosisWidget> {
 
   String diagnosisTitle = "";
   List<QuestionWidgetModel> questionWidgetModels = [];
@@ -49,13 +49,26 @@ class DiagnosisState extends State<DiagnosisWidget> {
   List<List<int>> answerIndicesList = [];
   List<List<String>> answerStringsList = [];
 
-  ///初期化時に一度呼ばれる
   @override
-  void initState() {
-    super.initState();
+  Widget build(BuildContext context) {
+    return FutureBuilder(
+      future: _initializeValues(),
+      builder: (context, snapshot) {
+        switch (snapshot.connectionState) {
+          case ConnectionState.waiting:
+            return Text("Loading...");
+          default:
+            return QuestionWidget(
+             questionWidgetModels[0],
+            );
+        }
+      },
+    );
+  }
 
+  Future<Void> _initializeValues() async {
     //initialize instance values
-    List<DiagnosisEntity> diagnosisEntities = DBClient.query(
+    List<DiagnosisEntity> diagnosisEntities = await DBClient.query(
         DBObjectsStrategy.diagnosis,
         where: 'id = ?',
         whereArgs: [widget.dependency.diagnosisID]
@@ -64,19 +77,13 @@ class DiagnosisState extends State<DiagnosisWidget> {
     this.diagnosisTitle = diagnosisEntity.name;
 
     //initialize question data
-    List<QuestionEntity> questionEntites = DBClient.query(
+    List<QuestionEntity> questionEntites = await DBClient.query(
       DBObjectsStrategy.question,
     );
     this.questionWidgetModels = widget.dependency.questionTranslator.translate(
         questionEntites,
         questionSelectionFinished
     );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    // TODO: implement build
-    throw UnimplementedError();
   }
 
   /// QuestionWidgetで回答が終わった時に呼ばれる
@@ -104,9 +111,9 @@ class DiagnosisState extends State<DiagnosisWidget> {
     } else {
       // もう質問が残っていない場合:
       //診断結果を計算
-      CalculatedDiagnosisResult result = widget.dependency.calculator.calculate(answerIndicesList, answerStringsList);
+      CalculatedDiagnosisResult result = await widget.dependency.calculator.calculate(answerIndicesList, answerStringsList);
       //診断結果を保存
-      widget.dependency.diagnosisResultHistoryRepository.add(result.diagnosisResultID);
+      await widget.dependency.diagnosisResultHistoryRepository.add(result.diagnosisResultID);
       //答えのデータの加工
       List<DiagnosisResultAnswerModel> answerModels = widget.dependency.answerTranslator.translate(
           questionWidgetModels.map((e) => e.question).toList(),

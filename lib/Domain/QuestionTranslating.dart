@@ -78,6 +78,8 @@ class QuestionTranslator implements QuestionTranslating {
             context
         );
       };
+
+      return model;
     }).toList();
 
     return questionWidgetModels;
