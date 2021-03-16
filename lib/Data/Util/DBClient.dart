@@ -250,7 +250,7 @@ class DBClient {
           "ほとんどの質問に答えるのに何秒かかかり、考えが遅くなっているのがわかる",
           "最大の努力をしないと、質問に答えられないことがしばしばある", "", "", "", "", "", "", 1, 1, 15),
       QuestionEntity(
-          "assets/0016-depression-psycomotor-slowing.png",
+          "assets/0016-depression-psycomotor-agitation.png",
           "なんとなく落ち着かないことはありますか？",
           "落ち着かない気持ちはない",
           "しばしばそわそわして、手を揉んだり、座り直したりせずにはいられない",

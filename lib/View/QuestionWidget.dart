@@ -2,7 +2,9 @@ import 'dart:core';
 import 'package:depression_diagnosis/View/QuestionWidgetModel.dart';
 import 'package:flutter/material.dart';
 
-class QuestionWidget extends StatefulWidget {
+import 'Protocol/BaseWidgetProtocol.dart';
+
+class QuestionWidget extends StatefulWidget with BaseWidgetProtocol {
 
   QuestionWidgetModel model;
 
@@ -21,32 +23,40 @@ class _QuestionWidgetState extends State<QuestionWidget> {
 
     final double deviceWidth = MediaQuery.of(context).size.width;
 
-    return Container(
-      child: Column(
+    return widget.wrapWidget([buildListView(deviceWidth, context)]);
+  }
+
+  ListView buildListView(double deviceWidth, BuildContext context) {
+    return ListView(
+    children: <Widget>[
+      Container(
+        child: Column(
         children: [
-          Image.asset(
-            widget.model.imageName,
-            width: deviceWidth - 10,
-            height: deviceWidth - 10
-          ),
-          Padding(
-            padding: EdgeInsets.only(left: 10, right: 10),
-            child: buildQuestionText(),
-          ),
-          ListView.builder(
-            shrinkWrap: true,
-              scrollDirection: Axis.vertical,
-              itemCount: widget.model.answers.length,
-              itemBuilder: (BuildContext ctxt, int index) {
-                return Container(
-                  //選択されたアイテムを色付け
-                  color: (_selectedItems.contains(index) ? Colors.blue.withOpacity(0.5) : Colors.transparent),
-                  child: buildListTile(index, context),
-                );
-              }),
+        Image.asset(
+        widget.model.imageName,
+        width: deviceWidth - 10,
+        height: deviceWidth - 10
+        ),
+        Padding(
+          padding: EdgeInsets.only(left: 10, right: 10),
+          child: buildQuestionText(),
+        ),
+        ListView.builder(
+          shrinkWrap: true,
+          scrollDirection: Axis.vertical,
+          itemCount: widget.model.answers.length,
+          itemBuilder: (BuildContext ctxt, int index) {
+            return Container(
+              //選択されたアイテムを色付け
+              color: (_selectedItems.contains(index) ? Colors.blue.withOpacity(0.5) : Colors.transparent),
+              child: buildListTile(index, context),
+            );
+          }),
         ],
       ),
-    );
+    )
+   ],
+  );
   }
 
   Text buildQuestionText() {

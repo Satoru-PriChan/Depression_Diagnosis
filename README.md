@@ -593,3 +593,13 @@ Widget build(BuildContext context) {
 ```
 
 https://stackoverflow.com/questions/61764400/state-initstate-must-be-a-void-method-without-an-async-keyword
+
+## ListTile widgets require a Material widget ancestor.
+
+Scafold, Materialで囲う。
+https://stackoverflow.com/questions/51772910/no-material-widget-found-textfield-widgets-require-a-material-widget-ancestor/51773529
+
+## デフォルト実装を提供するには
+
+extends, またはmixinを使う。
+https://stackoverflow.com/questions/17789399/providing-default-implementation-for-method-in-abstract-class

@@ -1,9 +1,10 @@
+import 'package:depression_diagnosis/View/Protocol/BaseWidgetProtocol.dart';
 import 'package:depression_diagnosis/View/QuestionWidget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'DiagnosisResultModel.dart';
 
-class DiagnosisResultWidget extends StatelessWidget {
+class DiagnosisResultWidget extends StatelessWidget with BaseWidgetProtocol {
 
   final DiagnosisResultModel model;
   static const double textHeight = 25.0;
@@ -14,7 +15,7 @@ class DiagnosisResultWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: buildWholeScreenList(),
+      child: wrapWidget([buildWholeScreenList()]),
     );
   }
 

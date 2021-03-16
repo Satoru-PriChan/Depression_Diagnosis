@@ -78,18 +78,13 @@ class MyApp extends StatelessWidget {
       // closer together (more dense) than on mobile platforms.
       visualDensity: VisualDensity.adaptivePlatformDensity,
     ),
-    home: Scaffold(
-      backgroundColor: Colors.green[100],
-      body: Stack(
-        children: buildMaterialApp(),
-      ),
-    ),
+    home: buildMaterialApp(),
   );
   }
 
 
-  List<Widget> buildMaterialApp() {
-    return <Widget>[
+  Widget buildMaterialApp() {
+    return
       DiagnosisWidget(
         DiagnosisWidgetDependency(
           1,
@@ -98,8 +93,7 @@ class MyApp extends StatelessWidget {
           QuestionTranslator(),
           DiagnosisResultHistoryRepository(),
       )
-     )
-    ];
+     );
   }
 /*
   List<Widget> buildTestDiagnosisResultWidget() {
