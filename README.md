@@ -603,3 +603,8 @@ https://stackoverflow.com/questions/51772910/no-material-widget-found-textfield-
 
 extends, またはmixinを使う。
 https://stackoverflow.com/questions/17789399/providing-default-implementation-for-method-in-abstract-class
+
+## 複数のウィジェットの横幅を同じサイズとしたい
+
+それらのウィジェットをExpandedの中に入れ、それらをRowの中に入れる。
+https://stackoverflow.com/questions/52583856/make-buttons-in-a-row-have-the-same-width-in-flutter

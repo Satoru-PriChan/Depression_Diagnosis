@@ -35,15 +35,17 @@ class DiagnosisResultWidget extends StatelessWidget with BaseWidgetProtocol {
           ),
         )
       ),
-      Padding(
-        padding: EdgeInsets.all(10.0),
-        child: Text(
-          model.resultText,
-          style: TextStyle(
-            fontSize: 28.0,
-          ),
-          maxLines: 3,
-        ),
+      Center(
+        child: Padding(
+          padding: EdgeInsets.all(10.0),
+          child: Text(
+            model.resultText,
+            style: TextStyle(
+              fontSize: 28.0,
+            ),
+            maxLines: 3,
+          )
+        )
       ),
       Padding(
         padding: EdgeInsets.all(10.0),
@@ -53,11 +55,11 @@ class DiagnosisResultWidget extends StatelessWidget with BaseWidgetProtocol {
         ),
       ),
       Padding(
-        padding: EdgeInsets.all(10.0),
+        padding: EdgeInsets.all(25.0),
         child: buildAnswersListView(),
       ),
       Padding(
-        padding: EdgeInsets.all(10.0),
+        padding: EdgeInsets.all(25.0),
         child: buildHistoryListView(),
       ),
     ],
@@ -77,18 +79,23 @@ class DiagnosisResultWidget extends StatelessWidget with BaseWidgetProtocol {
                   children: [
                     buildTextInSizedBox((Index + 1).toString(), width: 20.0),
                     Expanded(
-                        child: Padding(
-                            padding: EdgeInsets.only(left: betweenTextsGap, right: betweenTextsGap),
-                            child: buildTextInSizedBox(
-                                "${model.answers[Index].question}",
-                                maxLinesCount: 2
-                            )
-                        ),
+                      child: Padding(
+                        padding: EdgeInsets.only(left: betweenTextsGap),
+                        child: buildTextInSizedBox(
+                            "${model.answers[Index].question}",
+                            maxLinesCount: 4)
+                      ),
                     ),
-                    buildTextInSizedBox(
-                        "${model.answers[Index].answer}",
-                        width: 60.0,
-                        maxLinesCount: 2),
+                    Expanded(
+                      child: Padding(
+                        padding: EdgeInsets.only(left: betweenTextsGap),
+                        child: buildTextInSizedBox(
+                            "${model.answers[Index].answer}",
+                            width: 60.0,
+                            maxLinesCount: 4),
+                      ),
+                    )
+
                   ],
                 ),
               );
@@ -106,11 +113,11 @@ class DiagnosisResultWidget extends StatelessWidget with BaseWidgetProtocol {
                 padding: EdgeInsets.only(top: 5.0, bottom: 5.0, left: 10.0, right: 10.0),
                 child: Row(
                   children: [
-                    buildTextInSizedBox("${model.history[Index].date}", width: 70.0),
+                    buildTextInSizedBox("${model.history[Index].date}", width: 100.0, maxLinesCount: 1),
                     Expanded(child: Padding(
                         child: buildTextInSizedBox(
                             "${model.history[Index].resultText}",
-                            maxLinesCount: 2
+                            maxLinesCount: 4
                         ),
                         padding: EdgeInsets.only(left: betweenTextsGap)
                       )
@@ -125,14 +132,16 @@ class DiagnosisResultWidget extends StatelessWidget with BaseWidgetProtocol {
   SizedBox buildTextInSizedBox(String text, { double width = null, int maxLinesCount = 1 }) {
     return SizedBox(
       width: width,
-      child: Container(
-        alignment: Alignment(0.0, 0.0),
-        color: Colors.white,
-        child: Text(
+      child: Expanded (child:
+        Container(
+         alignment: Alignment(0.0, 0.0),
+         color: Colors.white,
+         child: Text(
           "${text}",
           textAlign: TextAlign.center,
           maxLines: maxLinesCount,
         ),
+       )
       )
     );
   }

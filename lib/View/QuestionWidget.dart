@@ -47,10 +47,10 @@ class _QuestionWidgetState extends State<QuestionWidget> {
           itemCount: widget.model.answers.length,
           itemBuilder: (BuildContext ctxt, int index) {
             return Container(
-              //選択されたアイテムを色付け
-              color: (_selectedItems.contains(index) ? Colors.blue.withOpacity(0.5) : Colors.transparent),
-              child: buildListTile(index, context),
-            );
+                    //選択されたアイテムを色付け
+                  color: (_selectedItems.contains(index) ? Colors.blue.withOpacity(0.5) : Colors.white70),
+                  child: buildListTile(index, context),
+                );
           }),
         ],
       ),
@@ -62,7 +62,7 @@ class _QuestionWidgetState extends State<QuestionWidget> {
   Text buildQuestionText() {
     return Text(
             widget.model.question,
-            maxLines: 3, 
+            maxLines: 4,
             style: TextStyle(
                 fontWeight: FontWeight.bold,
                 decoration: TextDecoration.underline,
@@ -74,7 +74,7 @@ class _QuestionWidgetState extends State<QuestionWidget> {
     return ListTile(
       title: Text(
         widget.model.answers[index],
-        maxLines: 1,
+        maxLines: 4,
       ),
       onTap: (){
         if(_selectedItems.contains(index)){
