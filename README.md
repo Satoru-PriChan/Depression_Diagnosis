@@ -608,3 +608,30 @@ https://stackoverflow.com/questions/17789399/providing-default-implementation-fo
 
 それらのウィジェットをExpandedの中に入れ、それらをRowの中に入れる。
 https://stackoverflow.com/questions/52583856/make-buttons-in-a-row-have-the-same-width-in-flutter
+
+## アプリアイコン
+
+https://qiita.com/rkowase/items/e0f3f8aec207ed8567aa
+https://pub.dev/packages/flutter_launcher_icons
+flutter_launcher_iconsを使う。
+
+iphone実機で見た時アイコンが反映されていない箇所があるように思ったが、iphoneを再起動したら治った。おそらくspringboardのバグ。
+
+## Android アダプティブアイコン
+
+説明 https://developer.android.com/guide/practices/ui_guidelines/icon_design_adaptive
+ジェネレータ https://easyappicon.com
+
+## Android キーストア
+
+https://flutter.dev/docs/deployment/android#create-a-keystore
+
+## This operation couldnt be completed. Unable to locate a Java Runtime. [macOS]
+
+Java Runtime
+https://code2care.org/howto/this-operation-couldnt-be-completed-unable-to-locate-a-java-runtime-maos
+
+## android studio cannot resolve symbol 'GradleException'
+
+FileNotFoundException()をGradleException()の代わりに使う。
+https://stackoverflow.com/questions/55575122/android-studio-cannot-resolve-symbol-gradleexception

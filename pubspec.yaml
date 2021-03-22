@@ -44,6 +44,8 @@ dev_dependencies:
   flutter_driver:
     sdk: flutter
 
+  flutter_launcher_icons:
+
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
@@ -102,3 +104,8 @@ flutter:
     - assets/0014-depression-fatigue.png
     - assets/0015-depression-psycomotor-slowing.png
     - assets/0016-depression-psycomotor-agitation.png
+
+flutter_icons:
+  image_path: "assets/icon.png"
+  android: true
+  ios: true
