@@ -625,6 +625,10 @@ iphone実機で見た時アイコンが反映されていない箇所がある�
 ## Android キーストア
 
 https://flutter.dev/docs/deployment/android#create-a-keystore
+https://qiita.com/rkowase/items/f1012ef0738791dd6084
+
+code magicを使うならこちら https://blog.codemagic.io/the-simple-guide-to-android-code-signing/
+
 
 ## This operation couldnt be completed. Unable to locate a Java Runtime. [macOS]
 
@@ -635,3 +639,6 @@ https://code2care.org/howto/this-operation-couldnt-be-completed-unable-to-locate
 
 FileNotFoundException()をGradleException()の代わりに使う。
 https://stackoverflow.com/questions/55575122/android-studio-cannot-resolve-symbol-gradleexception
+
+## Failed to read key from store "/Users/builder/keystore/key.jks": No key with alias 'upload' found in keystore /Users/builder/keystore/key.jks
+コマンドでkeyを生成する時に引数としてaliasをしているはずだが、ここで指定したaliasとkey.propertiesで書いているaliasが一致していることを確認。
