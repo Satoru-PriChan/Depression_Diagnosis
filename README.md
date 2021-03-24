@@ -653,3 +653,11 @@ https://github.com/tekartik/sqflite/issues/536
 
 ExpandedはRow, Column, flexの配下のみで使うようにした。
 https://stackoverflow.com/questions/54905388/incorrect-use-of-parent-data-widget-expanded-widgets-must-be-placed-inside-flex
+
+## App-specific password does not match required pattern (xxxx-xxxx-xxxx-xxxx)
+
+Codemagicでは、Apple IDのパスワードそのものではなくApp Specific Passwordを入力する。https://support.apple.com/en-us/HT204397
+
+## Only releases with status draft may be created on draft app
+
+google play consoleで一回手動でアプリをアップロードしてから出ないとコマンドでのアップロードはできない。
