@@ -632,7 +632,7 @@ code magicを使うならこちら https://blog.codemagic.io/the-simple-guide-to
 
 ## This operation couldnt be completed. Unable to locate a Java Runtime. [macOS]
 
-Java Runtime
+Java Runtimeを導入する
 https://code2care.org/howto/this-operation-couldnt-be-completed-unable-to-locate-a-java-runtime-maos
 
 ## android studio cannot resolve symbol 'GradleException'
@@ -641,4 +641,15 @@ FileNotFoundException()をGradleException()の代わりに使う。
 https://stackoverflow.com/questions/55575122/android-studio-cannot-resolve-symbol-gradleexception
 
 ## Failed to read key from store "/Users/builder/keystore/key.jks": No key with alias 'upload' found in keystore /Users/builder/keystore/key.jks
-コマンドでkeyを生成する時に引数としてaliasをしているはずだが、ここで指定したaliasとkey.propertiesで書いているaliasが一致していることを確認。
+コマンドでkeyを生成する時に引数としてaliasを渡しているはずだが、ここで指定したaliasとkey.propertiesで書いているaliasが一致していることを確認。
+
+## building for iOS-armv7 but attempting to link with file built for iOS-arm64 Undefined symbols for architecture armv7:
+
+armv7(iPhone3~5)の古いアーキテクチャ向けにビルドしようとすると、sqfliteが対応していないためにバグが起きる模様。色々解決策はありそうだが、そのような古いモデル向けにはビルドせず、アーキテクチャをarm64のみに設定したら通った。
+
+https://github.com/tekartik/sqflite/issues/536
+
+## Incorrect use of ParentDataWidget.  The ParentDataWidget Expanded(flex: 1) wants to apply ParentData of type FlexParentData to a RenderObject, which has been set up to accept ParentData of incompatible type ParentData.  Usually, this means that the Expanded widget has the wrong ancestor RenderObjectWidget. Typically, Expanded widgets are placed directly inside Flex widgets. The offending Expanded is currently placed inside a SizedBox widget
+
+ExpandedはRow, Column, flexの配下のみで使うようにした。
+https://stackoverflow.com/questions/54905388/incorrect-use-of-parent-data-widget-expanded-widgets-must-be-placed-inside-flex

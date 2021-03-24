@@ -132,8 +132,7 @@ class DiagnosisResultWidget extends StatelessWidget with BaseWidgetProtocol {
   SizedBox buildTextInSizedBox(String text, { double width = null, int maxLinesCount = 1 }) {
     return SizedBox(
       width: width,
-      child: Expanded (child:
-        Container(
+      child: Container(
          alignment: Alignment(0.0, 0.0),
          color: Colors.white,
          child: Text(
@@ -142,7 +141,6 @@ class DiagnosisResultWidget extends StatelessWidget with BaseWidgetProtocol {
           maxLines: maxLinesCount,
         ),
        )
-      )
     );
   }
 }
